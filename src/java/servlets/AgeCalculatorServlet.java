@@ -34,15 +34,16 @@ public class AgeCalculatorServlet extends HttpServlet {
                 int age = Integer.parseInt(userAge);
                 int agePlus = age + 1;
 
-                String message = "Your age next year will be " + agePlus;
-                request.setAttribute("message", message);
+                request.setAttribute("message", "Your age next year will be " + agePlus);
                 getServletContext().getRequestDispatcher("/WEB-INF/agecalculator.jsp")
                         .forward(request, response);
+                
             } catch (NumberFormatException exception) {
-                String message = "You must enter a number";
-                request.setAttribute("message", message);
+                
+                request.setAttribute("message", "You must enter a number");
                 getServletContext().getRequestDispatcher("/WEB-INF/agecalculator.jsp")
                 .forward(request, response);
+                
             }
 
         }
