@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package servlets;
 
 import java.io.IOException;
@@ -20,16 +15,64 @@ public class ArithmeticCalculatorServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-      getServletContext().getRequestDispatcher("/WEB-INF/arithmeticcalculator.jsp")
-              .forward(request, response);
+
+        request.setAttribute("result", "---");
+
+        getServletContext().getRequestDispatcher("/WEB-INF/arithmeticcalculator.jsp")
+                .forward(request, response);
     }
 
-       @Override
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-    }
 
-  
+        String first = request.getParameter("first");
+        String second = request.getParameter("second");
+        String operation = request.getParameter("operation");
+
+        request.setAttribute("first", first);
+        request.setAttribute("second", second);
+        
+        if (first == null || first.equals("") || second == null || second.equals("")) {
+            request.setAttribute("result", "invalid");
+
+            getServletContext().getRequestDispatcher("/WEB-INF/arithmeticcalculator.jsp")
+                    .forward(request, response);
+            
+        } else {
+            try {
+                
+                int firstNum = Integer.parseInt(first);
+                int secondNum = Integer.parseInt(second);
+
+                switch (operation) {
+                    case "+":
+                        request.setAttribute("result", firstNum + secondNum);
+                        break;
+
+                    case "-":
+                        request.setAttribute("result", firstNum - secondNum);
+                        break;
+
+                    case "*":
+                        request.setAttribute("result", firstNum * secondNum);
+                        break;
+
+                    case "%":
+                        request.setAttribute("result", firstNum % secondNum);
+                        break;
+                }
+                
+                getServletContext().getRequestDispatcher("/WEB-INF/arithmeticcalculator.jsp")
+                        .forward(request, response);
+                
+            } catch (NumberFormatException exception) {
+                request.setAttribute("result", "invalid");
+                 getServletContext().getRequestDispatcher("/WEB-INF/arithmeticcalculator.jsp")
+                        .forward(request, response);
+            }
+
+        }
+    }
 
 }
