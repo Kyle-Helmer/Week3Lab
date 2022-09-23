@@ -1,7 +1,7 @@
 <%-- 
     Document   : agecalculator
     Created on : 23-Sep-2022, 8:27:45 AM
-    Author     : super
+    Author     : Kyle Helmer
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -13,12 +13,16 @@
     </head>
     <body>
         <h1>Age Calculator</h1>
-        Enter your Age: <input type="number" name="userAge" value="">
+        <form action="age" method="post" >
+        Enter your Age: <input type="text" name="userAge" value="">
         <br>
-        <input type="button" name="ageButton" value="Age next birthday">
-        <p name="ageResult"> 
-            <a href=""> 
-                
+        <input type="submit" value="Age next birthday">
+       
+        <p>
+            ${message}
+        </p>
+            <a href="arithmetic">Arithmetic Calculator</a>
+        </form>   
                 
     </body>
 </html>

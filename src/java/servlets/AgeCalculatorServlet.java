@@ -23,6 +23,16 @@ public class AgeCalculatorServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        int age = Integer.parseInt(request.getParameter("userAge"));
+        int agePlus = age + 1;
+        
+        String message = "Your age next year will be " + agePlus;
+        request.setAttribute("message", message);
+        
+        getServletContext().getRequestDispatcher("/WEB-INF/agecalculator.jsp")
+                .forward(request, response);
+        
     }
 
    
